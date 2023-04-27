@@ -23,6 +23,22 @@ mongoose.connection.on("connected", () => {
   console.log("MongoDB connected");
 });
 
+app.use(express.json());
+
+app.use("/api/hotels", hotelsRoute);
+
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong";
+
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
 app.listen(PORT, () => {
   connect();
   console.log(`Server connected at port : ${PORT}`);
