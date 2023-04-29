@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import hotelsRoute from "../api/routes/hotels.js";
 import cookieParser from "cookie-parser";
 import usersRoute from "../api/routes/user.js";
+import roomsRoute from "../api/routes/room.js";
+
 const app = express();
 const PORT = 4000 || 8000;
 dotenv.config();
@@ -30,6 +32,7 @@ app.use(express.json());
 
 app.use("/api/hotels", hotelsRoute);
 app.use("api/users", usersRoute);
+app.use("api/rooms", roomsRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
