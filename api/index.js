@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import hotelsRoute from "../api/routes/hotels.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 4000 || 8000;
@@ -23,6 +25,7 @@ mongoose.connection.on("connected", () => {
   console.log("MongoDB connected");
 });
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/hotels", hotelsRoute);
